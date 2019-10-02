@@ -188,9 +188,9 @@ function adjustApp(layoutTypes,topHeader,columnOnePCT,columnTwoPCT,columnThreePC
     var h = window.innerHeight;
     if (layoutTypes == "1 Column") {
         if (topHeader) {
-            document.getElementById("header").style.display = "flex";
+            document.getElementById("header").style.display = "block";
             document.getElementById("index").style.display = "none";
-            document.getElementById("content").style.display = "flex";
+            document.getElementById("content").style.display = "block";
             document.getElementById("indexRight").style.display = "none";             
             
             var headerHeight = Math.round(h*.1);
@@ -217,9 +217,9 @@ function adjustApp(layoutTypes,topHeader,columnOnePCT,columnTwoPCT,columnThreePC
     }
     if (layoutTypes == "2 Column") {
         if (topHeader) {
-            document.getElementById("header").style.display = "flex";
-            document.getElementById("index").style.display = "flex";
-            document.getElementById("content").style.display = "flex";
+            document.getElementById("header").style.display = "block";
+            document.getElementById("index").style.display = "block";
+            document.getElementById("content").style.display = "block";
             document.getElementById("indexRight").style.display = "none";            
             
             var headerHeight = Math.round(h*.1);
@@ -257,10 +257,10 @@ function adjustApp(layoutTypes,topHeader,columnOnePCT,columnTwoPCT,columnThreePC
     }    
     if (layoutTypes == "3 Column") {
         if (topHeader) {
-            document.getElementById("header").style.display = "flex";
-            document.getElementById("index").style.display = "flex";
-            document.getElementById("content").style.display = "flex";
-            document.getElementById("indexRight").style.display = "flex";
+            document.getElementById("header").style.display = "block";
+            document.getElementById("index").style.display = "block";
+            document.getElementById("content").style.display = "block";
+            document.getElementById("indexRight").style.display = "block";
             
             var headerHeight = Math.round(h*.1);
             document.getElementById("header").style.left = "0px";
