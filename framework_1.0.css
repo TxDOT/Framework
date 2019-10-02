@@ -17,9 +17,9 @@ div {
     height: 0px;
     overflow: auto;                
     background-color: #FFFFE0; 
-    display: flex;
+/*     display: flex;
     align-items: center;
-    justify-content: center                
+    justify-content: center                 */
 }
 #index {
     position: absolute;
@@ -28,9 +28,9 @@ div {
     width: 0px;
     height: 0px;
     overflow: auto;
-    display: flex;
+/*     display: flex;
     align-items: center;
-    justify-content: center                
+    justify-content: center;                 */
 }
 #content {
     position: absolute;
@@ -39,11 +39,11 @@ div {
     width: 0px;
     height: 0px;
     /*border-left: 1px solid black;*/
-    overflow: hidden;
+    overflow: auto;
     background-color: lightblue;
-    display: flex;
+/*     display: flex;
     align-items: center;
-    justify-content: center                
+    justify-content: center;                 */
 } 
 #indexRight {
     position: absolute;
@@ -52,9 +52,9 @@ div {
     width: 0px;
     height: 0px;
     overflow: auto;
-    display: flex;
+/*     display: flex;
     align-items: center;
-    justify-content: center                
+    justify-content: center;                 */
 }
 table,td,th {
     border: 1px solid gray;
