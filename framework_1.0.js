@@ -313,11 +313,13 @@ function adjustApp(layoutTypes,topHeader,columnOnePCT,columnTwoPCT,columnThreePC
     }
 
     //Enable when drawing with Canvas
-    // var canvas = document.getElementById("myCanvas");
-    // canvas.style.width ='100%';
-    // canvas.style.height ='100%';
-    // canvas.width  = canvas.offsetWidth;
-    // canvas.height = canvas.offsetHeight;
+    if (document.getElementById("myCanvas")) {
+      var canvas = document.getElementById("myCanvas");
+      canvas.style.width ='100%';
+      canvas.style.height ='100%';
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
 }
 //---------------------------------------
 
