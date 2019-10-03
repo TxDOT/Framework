@@ -612,9 +612,10 @@ function drawLine(begX,begY,endX,endY,theWidth,theColor) {
     ctx.stroke();
 }
 
-function drawPolygon(theCoords,theWidth,fillColor,outlineColor) {
+function drawPolygon(theCoords,theWidth,fillColor,outlineColor,theScale) {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    ctx.scale(theScale, theScale);
     ctx.beginPath();
     ctx.lineWidth = theWidth;
 
