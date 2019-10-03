@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--Framework html Demo September 27, 2019-->
+<!--Created for TPP-Data Management by Michael Chamberlain-->
+
+<html>
+    <head>
+        <!--https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container-->
+        <link rel="stylesheet" href="framework_1.0.css">
+        <script src="framework_1.0.js"></script>
+        <script type="text/javascript">
+            function testIt() {
+                var numberAsText = "10000000";
+                infoDialog(addCommas(numberAsText));
+
+                toggleDiv("content");
+            }
+            function testOne() {
+                replaceDIVContents("header","Michael Chamberlain");                
+            }
+            function testOneP1() {
+                appendToDIV("content","Michael Chamberlain<br>"); 
+            }   
+            function testOneP2() {
+                prependToDIV("content","Michael Chamberlain<br>");
+            }               
+            function testOneP5() {
+                reSizeDiv("content",200,200); 
+            }            
+            function test2() {
+                resetInputs("indexRight","checkbox");
+                resetInputs("indexRight","radio");
+                resetInputs("indexRight","text");
+            }
+            function test3() {
+                infoDialog(resolveURL());
+            }
+            function test4() {
+                saveToLocalStorage(document.getElementById("textInput").value);
+            }
+            function test5() {
+                infoDialog(viewLocalStorage());
+            }
+            function test6() {
+                clearLocalStorage();
+            }
+            function test7() {
+                infoDialog(getLocalStorageRecordCount());
+            }
+            function test8() {
+                deleteLastLocalStorageRecord();
+                testSeven();
+            }  
+            function test9() {
+                beep();
+            }  
+            function test10() {
+                appendToDIV("content",makeDateTime()+"<br>" );
+            }  
+            function test11() {
+                appendToDIV("content",roundToDecimalPlace(document.getElementById("textInput").value,2) +"<br>" );
+            }              
+            function test12() {
+                appendToDIV("content",getRandomIntInclusive(1,100) +"<br>" );
+            }                 
+            function test13() {
+                var list = [2,5,9,87,12,35,2,3,99];
+                appendToDIV("content",findMin(list)+"<br>" );
+            }  
+            function test14() {
+                var list = [2,5,9,87,12,35,2,3,99];
+                appendToDIV("content",findMax(list) +"<br>" );
+            }              
+            function test15() {
+                var list = [2,5,9,87,12,35,2,3,99];                
+                appendToDIV("content",sumNumericArray(list) +"<br>" );
+            } 
+            function test17() {
+                appendToDIV("content",getLeftCharacters(document.getElementById("textInput").value,2) +"<br>" );
+            }  
+            function test18() {
+                appendToDIV("content",getRightCharacters(document.getElementById("textInput").value,2) +"<br>" );
+            }  
+            function test19() {
+                appendToDIV("content",getMiddleCharacters(document.getElementById("textInput").value,2,4) +"<br>" );
+            }  
+            function test20() {
+                appendToDIV("content",addCommas(document.getElementById("textInput").value) +"<br>" );
+            }  
+            function test21() {
+                appendToDIV("content",removeCommas(document.getElementById("textInput").value) +"<br>" );
+            }  
+            function test22() {
+                appendToDIV("content",replaceCharacter(document.getElementById("textInput").value,"-") +"<br>" );
+            }  
+            function test23() {
+                drawPoint(50,50,3,"#ff6347");
+            } 
+            function test24() {
+                drawLine(25,25,225,225,3,"#ffa500");
+            }             
+            function test25() {
+                var polyCoords = [[72,75],[152,95],[182,125],[212,235],[152,200]];                
+                // appendToDIV("content",sumNumericArray(list) +"<br>" );
+                drawPolygon(polyCoords,2,"#CEECF5","#08088A");
+            } 
+            function test26() {
+                drawRectangle(125,125,200,100,"#08088A");
+            } 
+            function test27() {
+                drawCircle(250,250,30,"#ff6347");
+            } 
+            function test28() {
+                drawText("Michael",375,375,"#08088A",25);
+            }             
+            function test29() {
+                clearDrawings();
+            }             
+        </script>
+    </head>
+    <body onload="init('3 Column',true,'.25','.50','.25')">
+        <div id="header">
+			Header
+        </div>
+        <div id="index">
+            <!--Index <br>-->
+            <table>
+                <tr>
+                    <td>
+                        DIV Tools
+                    </td>
+                    <td>
+                        Local Storage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="testOne()">Replace DIV Contents</button>
+                        <br><br>
+                        <button type="button" onclick="testOneP1()">Append to DIV</button>
+                        <br><br>            
+                        <button type="button" onclick="testOneP2()">Prepend to DIV</button>
+                        <br><br>            
+                        <button type="button" onclick="testOneP5()">Resize DIV</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="test4()">Save to Local Storage</button>
+                        <br><br> 
+                        <button type="button" onclick="test5()">View Local Storage</button>
+                        <br><br>   
+                        <button type="button" onclick="test6()">Clear Local Storage</button>
+                        <br><br>               
+                        <button type="button" onclick="test7()">Local Storage Record Count</button>
+                        <br><br>   
+                        <button type="button" onclick="test8()">Delete Last Record</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Numbers
+                    </td>
+                    <td>
+                        Drawing
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <button type="button" onclick="test11()">Round to Decimal Place</button>
+                        <br><br>              
+                        <button type="button" onclick="test12()">Random Number</button>
+                        <br><br>    
+                        <button type="button" onclick="test13()">Find Min</button>
+                        <br><br>            
+                        <button type="button" onclick="test14()">Find Max</button>
+                        <br><br>              
+                        <button type="button" onclick="test15()">Sum Array of Numbers</button>                        
+                    </td>
+                    <td>
+                        <button type="button" onclick="test23()">Draw Point</button>
+                        <br><br>  
+                        <button type="button" onclick="test24()">Draw Line</button>
+                        <br><br>  
+                        <button type="button" onclick="test25()">Draw Polygon</button>
+                        <br><br>                                
+                        <button type="button" onclick="test26()">Draw Rectangle</button>
+                        <br><br>  
+                        <button type="button" onclick="test27()">Draw Circle</button>
+                        <br><br>                   
+                        <button type="button" onclick="test28()">Draw Text</button>
+                        <br><br>                          
+                        <button type="button" onclick="test29()">Clear Drawings</button>
+                        <br><br>                          
+                    </td>
+                </tr>  
+                <tr>
+                    <td>
+                        String Operations
+                    </td>
+                    <td>
+                        General
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
+                        <button type="button" onclick="test17()">Get Left Characters</button>
+                        <br><br>              
+                        <button type="button" onclick="test18()">Get Right Characters</button>
+                        <br><br>    
+                        <button type="button" onclick="test19()">Get Middle Characters</button>
+                        <br><br>            
+                        <button type="button" onclick="test20()">Add Commas</button>
+                        <br><br>              
+                        <button type="button" onclick="test21()">Remove Commas</button>
+                        <br><br>
+                        <button type="button" onclick="test22()">Replace Character</button>
+                         
+                    </td>
+                    <td>
+                        <button type="button" onclick="test2()">Reset Input (Check,Radio,Text)</button>
+                        <br><br>
+                        <button type="button" onclick="test3()">Get parameters from URL</button>
+                        <br><br>
+                        <button type="button" onclick="test9()">Beep</button>
+                        <br><br>
+                        <button type="button" onclick="test10()">Date and Time</button>
+                        <br><br> 
+                    </td>
+                </tr>                 
+            </table>
+           
+        </div>
+        <div id="content">
+			Content<br>
+			<!--<canvas id="myCanvas">-->
+   <!--           graphics-->
+   <!--         </canvas>-->
+        </div>
+        <div id="indexRight">
+            <!--Index <br>-->
+            
+            <!--Reset Inputs-->  
+            <br>
+			<input type="checkbox" name="colors"/>Blue<br>
+			<input type="checkbox" name="colors"/>Red<br>
+			<input type="checkbox" name="colors"/>Green<br>
+			<input type="checkbox" name="colors"/>Purple<br>
+			
+			<br>
+			
+			<input type="radio" name="myRadio">Up<br>
+			<input type="radio" name="myRadio">Down<br>
+			<input type="radio" name="myRadio">Left<br>
+			<input type="radio" name="myRadio">Right<br>
+			
+			<br>
+			
+			Name: <input type="text" id="textInput" name="myText" value="Michael"/>
+        </div>
+    </body>
+</html>   
