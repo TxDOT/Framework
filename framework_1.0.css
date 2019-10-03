@@ -5,18 +5,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 div {
-    text-align: center;
+    /* text-align: center; */
     font-size: 16px;
-    border: 0px solid #DCDCDC;            	
-}   
+    border: 0px solid #DCDCDC;
+}
 #header {
     position: absolute;
     left: 0px;
     top: 0px;
     width: 0px;
     height: 0px;
-    overflow: auto;                
-    background-color: #FFFFE0; 
+    overflow: auto;
+    background-color: #FFFFE0;
 /*     display: flex;
     align-items: center;
     justify-content: center                 */
@@ -44,7 +44,7 @@ div {
 /*     display: flex;
     align-items: center;
     justify-content: center;                 */
-} 
+}
 #indexRight {
     position: absolute;
     left: 0px;
@@ -71,4 +71,4 @@ tr:nth-child(even){
 }
 tr:nth-child(odd){
     background-color: #F8F8FF;
-}            
+}
