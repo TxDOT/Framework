@@ -103,6 +103,9 @@
 // <!--drawLine(begX,begY,endX,endY,theWidth,theColor)
 // accepts beginning and ending xy location, width, and color paramaters to draw a line in a canvas element-->
 
+// <!--drawPolygon(theCoords,theWidth,fillColor,outlineColor)
+// accepts an array of points ([[5,10],[25,50],[125,150]]), line width, fill color (#ffffff), and line color (#dddddd) parameters to draw a polygon in a canvas element-->
+
 // <!--drawText(theText,theX,theY,theColor,theSize)
 // accepts a string, xy location, color, and numeric text size to draw a text element on the canvas element-->
 
@@ -604,6 +607,32 @@ function drawLine(begX,begY,endX,endY,theWidth,theColor) {
     ctx.moveTo(begX,begY);
     ctx.lineTo(endX,endY);
     ctx.strokeStyle = theColor;
+    ctx.stroke();
+}
+
+function drawPolygon(theCoords,theWidth,fillColor,outlineColor) {
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.lineWidth = theWidth;
+
+    //First point
+    ctx.moveTo(theCoords[0][0],theCoords[0][1]);
+
+    //Remainder of points
+    for (var i = 0; i < theCoords.length; i++) {
+        if (i > 0) {
+            ctx.lineTo(theCoords[i][0],theCoords[i][1]);
+        }
+    }
+
+    //Closing the polygon
+    ctx.closePath();
+
+    //Colors and styles
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.strokeStyle = outlineColor;
     ctx.stroke();
 }
 
