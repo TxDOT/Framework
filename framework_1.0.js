@@ -88,8 +88,8 @@
 // <!--removeCommas(nStr)
 // accepts a string and return string without commas as needed-->
 
-// <!--replaceCharacter(theText)
-// accepts a string and returns a string without any special characters (replaces them with an "_")-->
+// <!--replaceCharacter(theText,theReplacement)
+// accepts a string and returns a string without any special characters (replaces them with the replacement pass to the function (theReplacement))-->
 
 // <!--drawRectangle(begX,begY,theWidth,theHeight,theColor)
 // accepts location, height, width, and color paramaters to draw a rectangle in a canvas element-->
@@ -563,8 +563,8 @@ function removeCommas(theString) {
     return newStr;
 }
 
-function replaceCharacter(theText) {
-    var newText = theText.replace(/[^a-zA-Z0-9 ]/g,'_');
+function replaceCharacter(theText,theReplacement) {
+    var newText = theText.replace(/[^a-zA-Z0-9 ]/g,theReplacement);
     console.log(newText);
     return newText;
 }
