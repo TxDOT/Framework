@@ -117,15 +117,20 @@
                 drawLine(25,25,225,225,3,"#ffa500");
             }
             function test25() {
-                var polyCoords = [[72,75],[152,95],[182,125],[212,235],[152,200]];
-                // appendToDIV("content",sumNumericArray(list) +"<br>" );
+                // var polyCoords = [[72,75],[152,95],[182,125],[212,235],[152,200]];
                 var newTexas = [];
+                var scaleFactor = 70;
 
                 for (var i = 0; i < Texas.length; i++) {
-                  newTexas.push([180+Texas[i][0],90-Texas[i][1]]);
+                  // newTexas.push([180+Texas[i][0],90-Texas[i][1]]);
+                  newTexas.push([(180+Texas[i][0])*scaleFactor,(90-Texas[i][1])*scaleFactor]);
                 }
-                // console.log(newTexas);
-                drawPolygon(newTexas,1,"#CEECF5","#08088A",4);
+                console.log(newTexas);
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.translate(-1*((180-107)*scaleFactor),-1*((90-37)*scaleFactor)); //-3500,-2600
+
+                drawPolygon(newTexas,1,"#CEECF5","#08088A",1);
             }
             function test26() {
                 drawRectangle(125,125,200,100,"#08088A");
@@ -253,7 +258,7 @@
 
         </div>
         <div id="content">
-    			Content<br>
+    			<!-- Content<br> -->
     			<canvas id="myCanvas">
                   <!-- graphics -->
           </canvas>
