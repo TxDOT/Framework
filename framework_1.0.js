@@ -30,21 +30,11 @@
 // <!--resetInputs(theDIV,theType)
 // accepts a Div ID and HTML element type, checkboxes and radio are set to false, input text is set to default-->
 
-<<<<<<< HEAD
 // <!--resolveURLSimple()
 // examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=", data following "=" can be separated by commas-->
 
 // <!--resolveURLMapService()
 // examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=" and "&" and "<" or ">" or "=", data following "=" can be separated by commas-->
-=======
-// <!--resolveURL()
-// examines the url for parameters.  Enter "?" at the end of the URL then separate each parameter/value with "&", each item is further split by "=", ">", or "<", multiple text values can be separated
-// by commas.  Text items are also enclosed with single quotes.  An array is returned with each field, operator, and value.
-// Example: ?NUM_LANES>5&ADT_CUR>50000&HSYS=IH,US,SH -->
-<<<<<<< HEAD
->>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
-=======
->>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
 
 // <!--startGPS()
 // starts navigation if supported in the browser, page will update location every second calling showStartUpPosition until turned off-->
@@ -394,98 +384,29 @@ function resetInputs(theDIV,theType) {
 //---------------------------------------
 
 //Retrieve Parameters from URL-----------
-<<<<<<< HEAD
 function resolveURLSimple() {
-=======
-function resolveURL() {
-    var theVariables = [];
-    var returnedVariables = [];
-<<<<<<< HEAD
->>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
-=======
->>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
     var docURL = document.URL;
     var theURLlen = docURL.length;
     var typeBegin = docURL.indexOf("?");
-
+    var typeEnd = docURL.indexOf("=");
     if (typeBegin<1) {
         console.log("No parameters found in the URL.");
         return;
     }
     else {
-        theVariables = docURL.substring(typeBegin+1,theURLlen).split("&");
+        var urlField = docURL.substring(typeBegin+1,typeEnd);
+        var urlValue = docURL.substring(typeEnd+1,theURLlen).split(",");
 
-        var tempNAI;
-        for (var i = 0; i < theVariables.length; i++) {
-          var equalOperator = theVariables[i].indexOf("=");
-          var greaterThanOperator = theVariables[i].indexOf("%3E");
-          var lessThanOperator = theVariables[i].indexOf("%3C");
-
-          if (equalOperator>0) {
-            tempNAI = theVariables[i].split("=");
-          }
-<<<<<<< HEAD
-
-          if (greaterThanOperator>0) {
-            tempNAI = theVariables[i].split("%3E");
-          }
-
-          if (lessThanOperator>0) {
-            tempNAI = theVariables[i].split("%3C");
-          }
-
-          searchValues = tempNAI[1].split(",");
-
-          for (var j = 0; j < searchValues.length; j++) {
-            if (isNaN(searchValues[j])) {
-              searchValues[j] = searchValues[j].replace("_", " ");
-              searchValues[j] = "'" + searchValues[j] + "'";
-            }
-          }
-
-          if (equalOperator>0) {
-            returnedVariables.push([tempNAI[0].toUpperCase(),"=",searchValues.toString()]);
-          }
-
-          if (greaterThanOperator>0) {
-            returnedVariables.push([tempNAI[0].toUpperCase(),">",searchValues[0].toString()]);
-          }
-
-=======
-
-          if (greaterThanOperator>0) {
-            tempNAI = theVariables[i].split("%3E");
-          }
-
-          if (lessThanOperator>0) {
-            tempNAI = theVariables[i].split("%3C");
-          }
-
-          searchValues = tempNAI[1].split(",");
-
-          for (var j = 0; j < searchValues.length; j++) {
-            if (isNaN(searchValues[j])) {
-              searchValues[j] = searchValues[j].replace("_", " ");
-              searchValues[j] = "'" + searchValues[j] + "'";
-            }
-          }
-
-          if (equalOperator>0) {
-            returnedVariables.push([tempNAI[0].toUpperCase(),"=",searchValues.toString()]);
-          }
-
-          if (greaterThanOperator>0) {
-            returnedVariables.push([tempNAI[0].toUpperCase(),">",searchValues[0].toString()]);
-          }
-
->>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
-          if (lessThanOperator>0) {
-            returnedVariables.push([tempNAI[0].toUpperCase(),"<",searchValues[0].toString()]);
-          }
+        for (var i = 0; i < urlValue.length; i++) {
+            urlValue[i] = urlValue[i].replace("_", " ");
         }
 
-        console.log(returnedVariables);
-        return returnedVariables;
+        for (var i = 0; i < urlValue.length; i++) {
+            urlValue[i] = "'" + urlValue[i] + "'";
+        }
+
+        console.log(urlField,urlValue);
+        return urlField, urlValue;
     }
 }
 
