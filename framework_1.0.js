@@ -185,7 +185,7 @@
 // accepts latitude and longitude values in decimal degrees and returns a bearing in degrees from the first to the second point
 
 // <!-- calculateMidPoint(fromLat,fromLong,toLat,toLong)
-// accepts latitude and longitude values in decimal degrees and returns a mid-point in degrees between the first and second point
+// accepts latitude and longitude values in decimal degrees and returns a mid-point in decimal degrees between the first and second point
 
 // <!-- calculateDistance(fromLat,fromLong,toLat,toLong)
 // accepts latitude and longitude values in decimal degrees and returns distance in miles between the first and second point
