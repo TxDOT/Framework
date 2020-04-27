@@ -1,6 +1,8 @@
 // Framework js version 1.0 September 26, 2019
 // Created for TPP-Data Management by Michael Chamberlain
 
+//Updated April 27, 2020
+
 // <!--This Framework contains the following functions-->
 
 // <!--init()
@@ -28,8 +30,18 @@
 // <!--resetInputs(theDIV,theType)
 // accepts a Div ID and HTML element type, checkboxes and radio are set to false, input text is set to default-->
 
+<<<<<<< HEAD
+// <!--resolveURLSimple()
+// examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=", data following "=" can be separated by commas-->
+
+// <!--resolveURLMapService()
+// examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=" and "&" and "<" or ">" or "=", data following "=" can be separated by commas-->
+=======
 // <!--resolveURL()
-// examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=", data following the "=" can be separated by commas-->
+// examines the url for parameters.  Enter "?" at the end of the URL then separate each parameter/value with "&", each item is further split by "=", ">", or "<", multiple text values can be separated
+// by commas.  Text items are also enclosed with single quotes.  An array is returned with each field, operator, and value.
+// Example: ?NUM_LANES>5&ADT_CUR>50000&HSYS=IH,US,SH -->
+>>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
 
 // <!--startGPS()
 // starts navigation if supported in the browser, page will update location every second calling showStartUpPosition until turned off-->
@@ -174,6 +186,15 @@
 
 // <!--checkKey(e)
 // accepts an event and returns the number of the key pressed on the keyboard-->
+
+// <!-- calculateBearing(fromLat,fromLong,toLat,toLong)
+// accepts latitude and longitude values in decimal degrees and returns a bearing in degrees from the first to the second point
+
+// <!-- calculateMidPoint(fromLat,fromLong,toLat,toLong)
+// accepts latitude and longitude values in decimal degrees and returns a mid-point in degrees between the first and second point
+
+// <!-- calculateDistance(fromLat,fromLong,toLat,toLong)
+// accepts latitude and longitude values in decimal degrees and returns distance in miles between the first and second point
 
 var searchTerms = ['Michael','Jessica','Makayla','Andrew'];
 
@@ -370,31 +391,148 @@ function resetInputs(theDIV,theType) {
 //---------------------------------------
 
 //Retrieve Parameters from URL-----------
+<<<<<<< HEAD
+function resolveURLSimple() {
+=======
 function resolveURL() {
+    var theVariables = [];
+    var returnedVariables = [];
+>>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
     var docURL = document.URL;
     var theURLlen = docURL.length;
     var typeBegin = docURL.indexOf("?");
-    var typeEnd = docURL.indexOf("=");
+
     if (typeBegin<1) {
         console.log("No parameters found in the URL.");
         return;
     }
     else {
-        var urlField = docURL.substring(typeBegin+1,typeEnd);
-        var urlValue = docURL.substring(typeEnd+1,theURLlen).split(",");
+        theVariables = docURL.substring(typeBegin+1,theURLlen).split("&");
 
-        for (var i = 0; i < urlValue.length; i++) {
-            urlValue[i] = urlValue[i].replace("_", " ");
+        var tempNAI;
+        for (var i = 0; i < theVariables.length; i++) {
+          var equalOperator = theVariables[i].indexOf("=");
+          var greaterThanOperator = theVariables[i].indexOf("%3E");
+          var lessThanOperator = theVariables[i].indexOf("%3C");
+
+          if (equalOperator>0) {
+            tempNAI = theVariables[i].split("=");
+          }
+
+          if (greaterThanOperator>0) {
+            tempNAI = theVariables[i].split("%3E");
+          }
+
+          if (lessThanOperator>0) {
+            tempNAI = theVariables[i].split("%3C");
+          }
+
+          searchValues = tempNAI[1].split(",");
+
+          for (var j = 0; j < searchValues.length; j++) {
+            if (isNaN(searchValues[j])) {
+              searchValues[j] = searchValues[j].replace("_", " ");
+              searchValues[j] = "'" + searchValues[j] + "'";
+            }
+          }
+
+          if (equalOperator>0) {
+            returnedVariables.push([tempNAI[0].toUpperCase(),"=",searchValues.toString()]);
+          }
+
+          if (greaterThanOperator>0) {
+            returnedVariables.push([tempNAI[0].toUpperCase(),">",searchValues[0].toString()]);
+          }
+
+          if (lessThanOperator>0) {
+            returnedVariables.push([tempNAI[0].toUpperCase(),"<",searchValues[0].toString()]);
+          }
         }
 
-        for (var i = 0; i < urlValue.length; i++) {
-            urlValue[i] = "'" + urlValue[i] + "'";
-        }
-
-        console.log(urlField,urlValue);
-        return urlField, urlValue;
+        console.log(returnedVariables);
+        return returnedVariables;
     }
 }
+
+function resolveURLMapService() {
+      //Sample URL = https://apps.dot.state.tx.us/mapri.html?RIA_RTE_ID=IH0035-KG&DI=14
+      var docURL = document.URL;
+      var theURLlen = docURL.length;
+      var typeBegin = docURL.indexOf("?");
+      var theQuery="";
+      var queryVariables = [];
+      var searchValues = [];
+      var theCenter = [];
+      var theZoom;
+      var theVariables = [];
+
+      if (typeBegin<1) {
+        theQuery = "";
+        return;
+      }
+
+      theVariables = docURL.substring(typeBegin+1,theURLlen).split("&");
+
+      var tempNAI;
+      for (var i = 0; i < theVariables.length; i++) {
+        var equalOperator = theVariables[i].indexOf("=");
+        var greaterThanOperator = theVariables[i].indexOf("%3E");
+        var lessThanOperator = theVariables[i].indexOf("%3C");
+
+        if (equalOperator>0) {
+          tempNAI = theVariables[i].split("=");
+        }
+
+        if (greaterThanOperator>0) {
+          tempNAI = theVariables[i].split("%3E");
+        }
+
+        if (lessThanOperator>0) {
+          tempNAI = theVariables[i].split("%3C");
+        }
+
+        if (tempNAI[0].toUpperCase()=="CENTER") {
+          theCenter = tempNAI[1].split(",");
+        }
+        else if (tempNAI[0].toUpperCase()=="ZOOM") {
+          theZoom = tempNAI[1];
+        }
+        else {
+          searchValues = tempNAI[1].split(",");
+
+          for (var j = 0; j < searchValues.length; j++) {
+            if (isNaN(searchValues[j])) {
+              searchValues[j] = searchValues[j].replace("_", " ");
+              searchValues[j] = "'" + searchValues[j] + "'";
+            }
+          }
+
+          if (equalOperator>0) {
+            queryVariables.push(tempNAI[0].toUpperCase() + " IN (" + searchValues.toString() + ")");
+          }
+
+          if (greaterThanOperator>0) {
+            queryVariables.push(tempNAI[0].toUpperCase() + " > " + searchValues[0].toString());
+          }
+
+          if (lessThanOperator>0) {
+            queryVariables.push(tempNAI[0].toUpperCase() + " < " + searchValues[0].toString());
+          }
+        }
+      }
+
+      for (var i = 0; i < queryVariables.length; i++) {
+        if (i==0) {
+          theQuery += queryVariables[i];
+        }
+        else {
+          theQuery += " AND " + queryVariables[i];
+        }
+      }
+
+      console.log(theQuery);
+      return theQuery;
+    }
 //---------------------------------------
 
 //GPS Operations-------------------------
@@ -873,5 +1011,72 @@ function showCoords(event) {
 function checkKey(e) {
     console.log(e.keyCode);
     return e.keyCode;
+}
+//---------------------------------------
+
+//Calculate Bearing ---------------------
+//Extend Number object with methods to convert between degrees & radians
+Number.prototype.toRadians = function() { return this * Math.PI / 180; };
+Number.prototype.toDegrees = function() { return this * 180 / Math.PI; };
+
+function calculateBearing(fromLat,fromLong,toLat,toLong) {
+    var lat1 = fromLat.toRadians();
+    var lat2 = toLat.toRadians();
+    var longDifference = (fromLong-toLong).toRadians();
+
+    var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(longDifference);
+    var y = Math.sin(longDifference) * Math.cos(lat2);
+    var radians = Math.atan2(y, x);
+    var bearing = radians.toDegrees();
+
+    var adjustedBearing = 0;
+    if (bearing<0) {
+        adjustedBearing = bearing * -1;
+    }
+    if (bearing>0) {
+        adjustedBearing = bearing + 180;
+    }
+    if (bearing==180) {
+        adjustedBearing = bearing;
+    }
+    if (bearing==0) {
+        adjustedBearing = bearing;
+    }
+
+    console.log(adjustedBearing);
+    return adjustedBearing;
+}
+//---------------------------------------
+
+//Calculate mid-point -------------------
+function calculateMidPoint(fromLat,fromLong,toLat,toLong) {
+    var midPoint = [];
+    var midX = ((Math.abs(fromLong) + Math.abs(toLong)) / 2) * -1;
+    var midY = (fromLat + toLat) / 2;
+
+    midPoint.push([midX,midY]);
+
+    console.log(midPoint);
+    return midPoint;
+}
+//---------------------------------------
+
+//Calculate Distance --------------------
+function calculateDistance(fromLat,fromLong,toLat,toLong) {
+    var radius = 6378137;  //radius of the earth in meters
+
+    var lat1 = fromLat.toRadians()
+    var long1 = fromLong.toRadians();
+    var lat2 = toLat.toRadians()
+    var long2 = toLong.toRadians();
+    var latDiff = lat2 - lat1;
+    var longDiff = long2 - long1;
+
+    var a = Math.sin(latDiff/2)*Math.sin(latDiff/2) + Math.cos(lat1)*Math.cos(lat2) * Math.sin(longDiff/2)*Math.sin(longDiff/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = roundToDecimalPlace((radius * c) / 1609.344,3);
+
+    console.log(d);
+    return d;
 }
 //---------------------------------------
