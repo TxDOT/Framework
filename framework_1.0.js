@@ -2,6 +2,7 @@
 // Created for TPP-Data Management by Michael Chamberlain
 
 //Updated April 27, 2020
+// renamed resolveURL to resolveURLSimple, added resolveURLMapService, added calculateBearing, calculateDistance, calculateMidPoint
 
 // <!--This Framework contains the following functions-->
 
@@ -34,7 +35,7 @@
 // examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=", data following "=" can be separated by commas-->
 
 // <!--resolveURLMapService()
-// examines the page url for any parameters following the site URL.  Splits URL based on "?" and "=" and "&" and "<" or ">" or "=", data following "=" can be separated by commas-->
+// examines the page url for any parameters following the site URL.  Splits URL based on "?" and "&", then "<" or ">" or "=", data following "=" can be separated by commas-->
 
 // <!--startGPS()
 // starts navigation if supported in the browser, page will update location every second calling showStartUpPosition until turned off-->
