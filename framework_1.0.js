@@ -2,7 +2,7 @@
 // Created for TPP-Data Management by Michael Chamberlain
 
 //Updated April 27, 2020
-// renamed resolveURL to resolveURLSimple, added resolveURLMapService, added calculateBearing, calculateDistance, calculateMidPoint
+// renamed resolveURL to resolveURLSimple, added resolveURLMapService, added calculateBearing, calculateDistance, calculateMidPoint, walkGeom, queryRecordFromServiceGeometry
 
 // <!--This Framework contains the following functions-->
 
@@ -127,6 +127,10 @@
 // <!--queryRecordFromService(theServiceName,theQuery,theOrder,theFields)
 // accepts service name, query, order, and fields, returns properly formatted string that is passed to xmlRequestWithProcessing-->
 
+// <!--queryRecordFromServiceGeometry(theServiceName,theField,theAttribute)
+// accepts service name, field name, and attribute, returns properly formatted string that is passed to xmlRequestWithProcessing (use to access feature geometry)-->
+// var theResult = xmlRequestWithProcessing(queryRecordFromServiceGeometry(theService,theField,theAttribute),walkGeom);
+
 // <!--addRecordToService(theServiceName,theData)
 // accepts service name and data that is passed to xmlRequestNoProcessing-->
 
@@ -189,6 +193,9 @@
 
 // <!-- calculateDistance(fromLat,fromLong,toLat,toLong)
 // accepts latitude and longitude values in decimal degrees and returns distance in miles between the first and second point
+
+// <!-- walkGeom(theGeometry)
+// Traverses the geometry object returned from the ESRI REST API to access the X,Y, and M values
 
 var searchTerms = ['Michael','Jessica','Makayla','Andrew'];
 
@@ -793,6 +800,11 @@ function queryRecordFromService(theServiceName,theQuery,theOrder,theFields) {
     return theRequest;
 }
 
+function queryRecordFromServiceGeometry(theServiceName,theField,theAttribute) {
+    var theRequest = theServiceName + "/query?f=json&where=" + theField + "='" + theAttribute + "'&returnGeometry=true&returnM=true";
+    return theRequest;
+}
+
 function addRecordToService(theServiceName,theData) {
     xmlRequestNoProcessing(theServiceName,"/addFeatures?f=json&features=" + theData);
 }
@@ -1035,5 +1047,27 @@ function calculateDistance(fromLat,fromLong,toLat,toLong) {
 
     console.log(d);
     return d;
+}
+//---------------------------------------
+
+//Traverse Geometry from ESRI RestAPI ---
+function walkGeom(theGeometry) {
+    var theGeomPart;
+    var coordX;
+    var coordY;
+    var coordM;
+
+    for (var a=0; a < theGeometry.features.length; a++) {
+        theGeomPart= theGeometry.features[a].geometry.paths;
+
+        for (var i = 0; i < theGeomPart.length; i++) {
+            for (var j = 0; j < theGeomPart[i].length; j++) {
+                coordX = theGeomPart[i][j][0];
+                coordY = theGeomPart[i][j][1];
+                coordM = roundToDecimalPlace(theGeomPart[i][j][2],3);
+                console.log("X:"+ roundToDecimalPlace(coordX,0),"Y:"+roundToDecimalPlace(coordY,0),"M:"+coordM);
+            }
+        }
+    }
 }
 //---------------------------------------
