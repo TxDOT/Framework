@@ -41,6 +41,9 @@
 // examines the url for parameters.  Enter "?" at the end of the URL then separate each parameter/value with "&", each item is further split by "=", ">", or "<", multiple text values can be separated
 // by commas.  Text items are also enclosed with single quotes.  An array is returned with each field, operator, and value.
 // Example: ?NUM_LANES>5&ADT_CUR>50000&HSYS=IH,US,SH -->
+<<<<<<< HEAD
+>>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
+=======
 >>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
 
 // <!--startGPS()
@@ -397,6 +400,9 @@ function resolveURLSimple() {
 function resolveURL() {
     var theVariables = [];
     var returnedVariables = [];
+<<<<<<< HEAD
+>>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
+=======
 >>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
     var docURL = document.URL;
     var theURLlen = docURL.length;
@@ -418,6 +424,7 @@ function resolveURL() {
           if (equalOperator>0) {
             tempNAI = theVariables[i].split("=");
           }
+<<<<<<< HEAD
 
           if (greaterThanOperator>0) {
             tempNAI = theVariables[i].split("%3E");
@@ -444,6 +451,34 @@ function resolveURL() {
             returnedVariables.push([tempNAI[0].toUpperCase(),">",searchValues[0].toString()]);
           }
 
+=======
+
+          if (greaterThanOperator>0) {
+            tempNAI = theVariables[i].split("%3E");
+          }
+
+          if (lessThanOperator>0) {
+            tempNAI = theVariables[i].split("%3C");
+          }
+
+          searchValues = tempNAI[1].split(",");
+
+          for (var j = 0; j < searchValues.length; j++) {
+            if (isNaN(searchValues[j])) {
+              searchValues[j] = searchValues[j].replace("_", " ");
+              searchValues[j] = "'" + searchValues[j] + "'";
+            }
+          }
+
+          if (equalOperator>0) {
+            returnedVariables.push([tempNAI[0].toUpperCase(),"=",searchValues.toString()]);
+          }
+
+          if (greaterThanOperator>0) {
+            returnedVariables.push([tempNAI[0].toUpperCase(),">",searchValues[0].toString()]);
+          }
+
+>>>>>>> 1167671aee3cd8617328153f3fbfa55f4c5ee451
           if (lessThanOperator>0) {
             returnedVariables.push([tempNAI[0].toUpperCase(),"<",searchValues[0].toString()]);
           }
