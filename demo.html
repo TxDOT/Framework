@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- Framework html version 2.0 October 14, 2021 -->
+<!-- Created by Michael Chamberlain -->
+<!-- This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/ -->
+<html>
+    <head>
+        <link rel="stylesheet" href="framework.css">
+        <script src="framework.js"></script>
+    </head>
+    <body onload="init('2 Column',true,'.25','.75','.25')">
+        <div id="header">
+			<div id="title">JavaScript Framework 2.0</div>
+        </div>
+        <div id="index">
+            <div id="items">
+                <br>Arrays<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',sumNumericArray([17,35,61]))">Sum Numbers in Array [17,35,61]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',mergeArrays([17,35,61],[2,8,7]))">Merge Array [17,35,61]<br />with Array [2,8,7]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',removeItemFromArray([17,35,61],35))">Remove 35 from Array<br />[17,35,61]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',sortNumberArray([35,7,16],'ASC'))">Sort Numeric Array ASC<br />[35,7,16]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',sortTextArray(['Pear','Banana','Apple'],'ASC'))">Sort Text Array ASC<br />['Pear','Banana','Apple']</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',findMin([35,7,16]))">Find Min Value in Array [35,7,16]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',findMax([35,7,16]))">Find Max Value in Array [35,7,16]</button>
+                <br>Charts<br>
+                <button onclick="prepForCanvas();dotChart('myCanvas',600,400,'#FFFFFF','#FF0000',[2020,2021,2022,2023,2024,2025],[50,100,150,200,250,300],'Chart Title','Year','Million VMT',[50,100,150,200,150,100])">Dot Chart 1</button>
+                <button onclick="prepForCanvas();dotChart('myCanvas',600,400,'#FFFFFF','#FF0000',[2020,2021,2022,2023],[50,100,150,200],'Chart Title','Years','Cars',[50,100,150,200])">Dot Chart 2</button>
+                <button onclick="prepForCanvas();lineChart('myCanvas',600,400,'#FFFFFF','#FF0000',[2020,2021,2022,2023],[50,100,150,200],'Chart Title','Years','Cars',[50,100,150,200])">Line Chart 1</button>
+                <button onclick="prepForCanvas();lineChart('myCanvas',800,600,'#FFFFFF','#FF0000',[2020,2021,2022,2023,2024,2025,2026,2027,2028],[50,100,150,200,250],'Chart Title','Years','Cars',[50,200,50,200,50,200,50,200,50])">Line Chart 2</button>
+                <button onclick="prepForCanvas();barChart('myCanvas',800,600,'#FFFFFF','lightblue',[2020,2021,2022,2023,2024],[100,200,300,400,500,600,700],'Chart Title','Year','Million VMT',[500,550,600,650,700])">Bar Chart 1</button>
+                <br>Export<br>
+                <button onclick="exportCSV('ID,Name,Rank\n1,Austin,100\n2,Dallas,150\n3,Houston,200\n')">Export CSV</button>
+                <button onclick="exportKML()">Export KML</button>
+                <button onclick="exportPNG()">Export PNG</button>
+                <br>GPS<br>
+                <button onclick="prepForText();startGPS()">Start GPS</button>
+                <button onclick="prepForText();stopGPS()">Stop GPS</button>
+                <br>Local Storage<br>
+                <button onclick="prepForText();saveToLocalStorage('Michael')">Save 'Michael' to Local Storage</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',getLocalStorageRecordCount())">Record Count of Local Storage</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',makeTableFromArrayNoHeader(viewLocalStorage()))">View Local Storage</button>
+                <button onclick="prepForText();deleteLastLocalStorageRecord()">Delete Last Record</button>
+                <button onclick="prepForText();clearLocalStorage()">Delete All Records</button>
+                <br>Maps<br>
+                <button onclick="prepForMap();setFrameSource('theIFrame','https://apps3.txdot.gov/map.html?CENTER=31.454264,-100.449408&ZOOM=12&NAV=FALSE&LEGEND=FALSE')">City of San Angelo</button>
+                <button onclick="prepForMap();setFrameSource('theIFrame','https://apps3.txdot.gov/map.html?HIGHWAY_NUMBER=SL_1604&MAP=LIGHTGRAY&Legend=true&nav=false')">SL 1604 Projects</button>
+                <button onclick="prepForMap();setFrameSource('theIFrame','https://apps3.txdot.gov/mapri.html?NUM_LANES=6&CO=227')">Travis Co. 6 Lanes</button>
+                <button onclick="prepForMap();setFrameSource('theIFrame','https://apps3.txdot.gov/eventmap.html?RIA_RTE_ID=IH0035-KG|230|245|#FF0000|4|Add%20Two%20Managed%20Lanes%20in%20Each%20Direction')">Add Managed Lanes to IH 35</button>
+                <br>Messages<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',confirmDialog('Do you want to proceed?'))">Confirm</button>
+                <button onclick="prepForText();alert('Alert from the JavaScript Framework 2.0')">Alert</button>
+                <br>Numbers<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',getRandomIntInclusive(1,1000))">Random Number between 1 and 1000</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',roundToDecimalPlace(-97.123456789,6))">Round -97.123456789 to 6 Places</button>
+                <br>Search<br>
+                <button onclick="prepForText();xmlRequestWithProcessing(queryRecordFromService('https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TxDOT_City_Boundaries/FeatureServer/0','OBJECTID>=0','CITY_NM ASC','CITY_NM'),processSearchTerms)">Load City Names from AGO</button>
+                <input id="searchInputBox" type="text" onkeyup="typeAheadSearch('textContent',this.value)">
+                <br>Spatial<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',roundToDecimalPlace(calculateBearing(30,-97,31,-98),2))">Bearing from 30,-97 to 31,-98</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',calculateMidPoint(30,-97,31,-98))">Midpoint between 30,-97 and 31,-98</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',calculateDistance(30,-97,31,-98))">Distance between 30,-97 and 31,-98</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',metersToLatLong([-10861277,3565432,10]))">WebMercator [-10861277,3565432] to WGS84</button>
+                <br>Tables<br>
+                <button onclick="prepForText();xmlRequestWithProcessing(queryRecordFromService('https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TxDOT_City_Boundaries/FeatureServer/0','POP2020>200000','CITY_NM ASC','*'),makeTableFromService)">City Table from AGO (POP>200,000)</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',makeTableFromArrayNoHeader([[1,'Austin',100],[2,'Dallas',150],[3,'Houston',200]]))">Make Table from Array<br />[[1,Austin,100],[2,Dallas,150],[3,Houston,200]]</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',makeTableFromArray([['ID','Name','Rank'],[1,'Austin',100],[2,'Dallas',150],[3,'Houston',200]]))">Make Table from Array with Header<br />[[ID,Name,Rank],[1,Austin,100],[2,Dallas,150],[3,Houston,200]]</button>
+                <br>Text<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',addCommas(123456789))">Add Commas 123456789</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',removeCommas('123,456,789'))">Remove Commas 123,456,789</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',replaceCharacter('H/e!l*p',''))">Replace Characters H/e!l*p to Help</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',getLeftCharacters('IH0035-KG',2))">Get Left 2 IH0035-KG</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',getRightCharacters('IH0035-KG',2))">Get Right 2 IH0035-KG</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',getMiddleCharacters('IH0035-KG',2,4))">Get Middle 4 IH0035-KG</button>
+                <br>Utilities<br>
+                <button onclick="prepForText();replaceDIVContents('textContent',makeDateTime())">Time / Date</button>
+                <button onclick="prepForText();prependToDIV('textContent','The Time and Date is ')">Prepend to Div</button>
+                <button onclick="prepForText();appendToDIV('textContent',' on Earth. ')">Append to Div</button>
+                <button onclick="prepForText();replaceDIVContents('textContent',resolveURLMapService())">Evaluate Document URL</button>
+            </div>
+        </div>
+        <div id="content">
+            <div id="divIFrame">
+                <iframe id="theIFrame" src="">
+                    <!--external pages here-->
+                </iframe>
+            </div>
+            <div id="textContent">
+                <!--general text here-->
+            </div>
+            <div id="parentCanvas">
+    			<canvas id="myCanvas">
+                    <!--custom graphics here-->
+                </canvas>
+            </div>
+        </div>
+        <div id="indexRight">
+            Index <br>
+        </div>
+    </body>
+</html>
